@@ -1427,6 +1427,13 @@ int HtmlGetColorByName(HtmlWidget *htmlPtr, char *zColor){
   ** compatibility.
   */
   n = strlen(zColor);
+
+  /* trucate any spaces on the end */
+  while (n>0 && zColor[n-1]==' ') {
+    zColor[n-1] = '\0';
+    n--;
+  }
+
   if( n==6 || n==3 || n==9 || n==12 ){
     for(i=0; i<n; i++){
       if( !isxdigit(zColor[i]) ) break;
@@ -1545,17 +1552,29 @@ LOCAL int GetColorByValue(HtmlWidget *htmlPtr, XColor *pRef){
   float dist;
   float closestDist;
   int closest;
+  /*
   int r, g, b;
 # define COLOR_MASK  0xf800
+  */
+
+  XColor* q;
+  q = Tk_GetColorByValue(htmlPtr->clipwin, pRef);
 
   /* Search for an exact match */
+  /*
   r = pRef->red &= COLOR_MASK;
   g = pRef->green &= COLOR_MASK;
   b = pRef->blue &= COLOR_MASK;
+  */
   for(i=0; i<N_COLOR; i++){
     XColor *p = htmlPtr->apColor[i];
+    /*
     if( p && (p->red & COLOR_MASK)==r && (p->green & COLOR_MASK)==g 
     && (p->blue & COLOR_MASK)==b ){
+    */
+    if (p && (q->red == p->red) 
+	&& (q->green == p->green) 
+	&& (q->blue == p->blue)) {
       htmlPtr->colorUsed |= (1<<i);
       return i;
     }
