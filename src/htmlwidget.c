@@ -1576,9 +1576,11 @@ LOCAL int GetColorByValue(HtmlWidget *htmlPtr, XColor *pRef){
 	&& (q->green == p->green) 
 	&& (q->blue == p->blue)) {
       htmlPtr->colorUsed |= (1<<i);
+      Tk_FreeColor(q);
       return i;
     }
   }
+  Tk_FreeColor(q);
 
   /* No exact matches.  Look for a completely unused slot */
   for(i=N_PREDEFINED_COLOR; i<N_COLOR; i++){
