@@ -82,6 +82,8 @@ static int ComponentLength(const char *z, const char *zInit, const char *zTerm){
 */
 static char *StrNDup(const char *z, int n){
   char *zResult;
+  if(!n)
+    return NULL;
   if( n<=0 ){
     n = strlen(z);
   }
@@ -313,7 +315,7 @@ int HtmlCallResolver(
           for(i=0; zBuf[i]; i++){
             if( zBuf[i]=='/' && zBuf[i+1]=='.' && zBuf[i+2]=='/' ){
               strcpy(&zBuf[i+1], &zBuf[i+3]);
-              i--;
+	      i--;
               continue;
             }
             if( zBuf[i]=='/' && zBuf[i+1]=='.' && zBuf[i+2]==0 ){
@@ -333,6 +335,10 @@ int HtmlCallResolver(
               continue;
             }
           }
+	  /* look for /../ at begining */
+	  if (!strncmp(zBuf,"/../",4))
+	    strcpy(zBuf,zBuf+3);
+
           HtmlFree(base->zPath);
           base->zPath = zBuf;
         }
