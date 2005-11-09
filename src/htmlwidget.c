@@ -1743,7 +1743,7 @@ static struct HtmlSubcommand {
   { "resolve",   0,         2, 0, "?URI ...?",           HtmlResolveCmd },
   { "selection", "clear",   3, 3, 0,                     HtmlSelectionClearCmd},
   { 0,           "set",     5, 5, "START END",           HtmlSelectionSetCmd },
-  { "text",      "ascii",   5, 5, "START END",           0 },
+  { "text",      "ascii",   5, 5, "START END",           HtmlTextAsciiCmd},
   { 0,           "delete",  5, 5, "START END",           0 },
   { 0,           "html",    5, 5, "START END",           0 },
   { 0,           "insert",  5, 5, "INDEX TEXT",          0 },
