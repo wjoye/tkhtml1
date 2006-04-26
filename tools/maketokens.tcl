@@ -25,6 +25,11 @@ while {![eof $f]} {
 }
 close $f
 
+global tcl_platform
+if {$tcl_platform(platform) == "windows"} {
+    fconfigure stdout -translation lf
+}
+
 puts {/* DO NOT EDIT
 ** The code in this file was automatically generated.
 */
