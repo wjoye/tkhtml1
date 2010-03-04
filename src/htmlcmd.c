@@ -298,7 +298,29 @@ int HtmlYviewCmd(
       TestPoint(0);
       break;
     }
-  }else{
+  } else if( argc==4 && !strncmp(argv[2],"text",4)) {
+    HtmlElement *p;
+    int i;
+
+    HtmlLock(htmlPtr);
+    if( HtmlGetIndex(htmlPtr, argv[3], &p, &i)!=0 ){
+      if( !HtmlUnlock(htmlPtr) ){
+	Tcl_AppendResult(interp,"malformed index: \"", argv[3], "\"", 0);
+      }
+      TestPoint(0);
+      return TCL_ERROR;
+    }
+    if( !HtmlUnlock(htmlPtr) && p ){
+      if( p->base.type==Html_Text ) {
+	int offset = p->text.y-20;
+	if (offset<0)
+	  offset = 0;
+	HtmlVerticalScroll(htmlPtr, offset);
+      }
+      TestPoint(0);
+    }
+  }
+  else{
     int count;
     double fraction;
     int maxY = htmlPtr->maxY;
