@@ -314,7 +314,13 @@ int HtmlCallResolver(
           strcat(zBuf, term->zPath);
           for(i=0; zBuf[i]; i++){
             if( zBuf[i]=='/' && zBuf[i+1]=='.' && zBuf[i+2]=='/' ){
-              strcpy(&zBuf[i+1], &zBuf[i+3]);
+	      // strcpy into same buf is undefined
+	      // strcpy(&zBuf[i+1], &zBuf[i+3]);
+	      int ll = strlen(zBuf+i+3)+1;
+	      char* tmp = malloc(ll);
+	      strncpy(tmp,zBuf+i+3,ll);
+	      strcpy(zBuf+i+1, tmp);
+	      free(tmp);
 	      i--;
               continue;
             }
@@ -326,7 +332,13 @@ int HtmlCallResolver(
                    && (zBuf[i+3]=='/' || zBuf[i+3]==0) ){
               for(j=i-1; j>=0 && zBuf[j]!='/'; j--){}
               if( zBuf[i+3] ){
-                strcpy(&zBuf[j+1], &zBuf[i+4]);
+		// strcpy into same buf is undefined
+		// strcpy(&zBuf[j+1], &zBuf[i+4]);
+		int ll = strlen(zBuf+i+4)+1;
+		char* tmp = malloc(ll);
+		strncpy(tmp,zBuf+i+4,ll);
+		strcpy(zBuf+j+1, tmp);
+		free(tmp);
               }else{
                 zBuf[j+1] = 0;
               }
@@ -336,9 +348,15 @@ int HtmlCallResolver(
             }
           }
 	  /* look for /../ at begining */
-	  if (!strncmp(zBuf,"/../",4))
-	    strcpy(zBuf,zBuf+3);
-
+	  if (!strncmp(zBuf,"/../",4)) {
+	    // strcpy into same buf is undefined
+	    // strcpy(zBuf,zBuf+3);
+	    int ll = strlen(zBuf+3)+1;
+	    char* tmp = malloc(ll);
+	    strncpy(tmp,zBuf+3,ll);
+	    strcpy(zBuf, tmp);
+	    free(tmp);
+	  }
           HtmlFree(base->zPath);
           base->zPath = zBuf;
         }
