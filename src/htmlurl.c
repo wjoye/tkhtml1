@@ -118,7 +118,9 @@ static HtmlUri *ParseUri(const char *zUri){
     p->zAuthority = StrNDup(&zUri[2], n-2);
     zUri += n;
   }
-  n = ComponentLength(zUri, "", "?# ");
+  /* allow spaces in path */
+  /* n = ComponentLength(zUri, "", "?# ");*/
+  n = ComponentLength(zUri, "", "?#");
   if( n>0 ){
     p->zPath = StrNDup(zUri, n);
     zUri += n;
