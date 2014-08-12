@@ -88,7 +88,7 @@ static Tk_ConfigSpec configSpecs[] = {
         DEF_HTML_CALLBACK, Tk_Offset(HtmlWidget, zFormCommand), 0},
     {TK_CONFIG_STRING, "-framecommand", "frameCommand", "HtmlCallback",
         DEF_HTML_CALLBACK, Tk_Offset(HtmlWidget, zFrameCommand), 0},
-    {TK_CONFIG_PIXELS, "-height", "height", "Hidth",
+    {TK_CONFIG_PIXELS, "-height", "height", "Height",
 	DEF_HTML_HEIGHT, Tk_Offset(HtmlWidget, height), 0},
     {TK_CONFIG_COLOR, "-highlightbackground", "highlightBackground",
 	"HighlightBackground", DEF_HTML_HIGHLIGHT_BG,
