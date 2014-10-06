@@ -1676,14 +1676,12 @@ void HtmlVerticalScroll(HtmlWidget *htmlPtr, int yOffset){
     TestPoint(0);
     return;
   }
-#if 0
   diff = htmlPtr->yOffset - yOffset;
   gc = HtmlGetAnyGC(htmlPtr);
   w = htmlPtr->realWidth - 2*(htmlPtr->inset + htmlPtr->padx);
-#endif
   htmlPtr->flags |= VSCROLL;
   htmlPtr->yOffset = yOffset;
-#if 0
+#ifndef _MACOSX
   if( diff < 0 ){
     XCopyArea(htmlPtr->display, 
             Tk_WindowId(htmlPtr->clipwin),    /* source */
@@ -1705,8 +1703,9 @@ void HtmlVerticalScroll(HtmlWidget *htmlPtr, int yOffset){
     HtmlRedrawArea(htmlPtr, 0, 0, w, diff);
     TestPoint(0);
   }
-#endif
+#else
   HtmlRedrawArea(htmlPtr, 0, 0, w, h);
+#endif
   /* HtmlMapControls(htmlPtr);*/
 }
 
