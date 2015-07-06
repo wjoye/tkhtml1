@@ -181,7 +181,19 @@ COMPILE		= $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(C
 # for the BINARIES that you specified above have already been done.
 #========================================================================
 
-all: binaries libraries #doc
+all: headers binaries libraries #doc
+
+headers: src/makeheaders src/htmltokens.c
+
+src/makeheaders: tools/makeheaders.c
+	@cd src; \
+	for i in *.c; do \
+	  list="$$list $$i:`basename $$i .c`.h"; \
+	done; \
+	echo $$list
+
+src/htmltokens.c: src/tokenlist.txt tools/maketokens.tcl
+	$(TCLSH) tools/maketokens.tcl src/tokenlist.txt > src/thmltokens.c
 
 #========================================================================
 # The binaries target builds executable programs, Windows .dll's, unix
@@ -206,7 +218,7 @@ doc:
 	@echo "        xml2nroff sample.xml > sample.n"
 	@echo "        xml2html sample.xml > sample.html"
 
-install: all install-binaries install-libraries @install-doc
+install: all install-binaries install-libraries #install-doc
 
 install-binaries: binaries install-lib-binaries install-bin-binaries
 
