@@ -33,7 +33,7 @@
 ** Version information for the package mechanism.
 */
 #define HTML_PKGNAME "Tkhtml"
-#define HTML_PKGVERSION "0.0"
+#define HTML_PKGVERSION "1.0"
 
 /*
 ** Sanity checking macros.
