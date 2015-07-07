@@ -184,13 +184,21 @@ COMPILE		= $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(C
 all: headers binaries libraries #doc
 
 headers: src/makeheaders src/htmltokens.c
+	for i in $(PKG_SOURCES); do \
+	  list="$$list `basename $$i`:`basename $$i .c`.h"; \
+	done; \
+	list="$$list htmltokens.c html.h"; \
+	cd src; \
+	./makeheaders $$list
 
-src/makeheaders: tools/makeheaders.c
-	@cd src; \
+#	cd src; \
 	for i in *.c; do \
 	  list="$$list $$i:`basename $$i .c`.h"; \
 	done; \
-	echo $$list
+	./makeheaders $$list
+
+src/makeheaders: tools/makeheaders.c
+	$(COMPILE) $< -o $@
 
 src/htmltokens.c: src/tokenlist.txt tools/maketokens.tcl
 	$(TCLSH) tools/maketokens.tcl src/tokenlist.txt > src/thmltokens.c
