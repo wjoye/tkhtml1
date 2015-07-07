@@ -185,7 +185,7 @@ all: binaries libraries #doc
 
 headers: src/makeheaders src/htmltokens.c
 	cd src; \
-	./makeheaders htmlcmd.c:htmlcmd.h htmldraw.c:htmldraw.h htmlform.c:htmlform.h htmlimage.c:htmlimage.h htmlindex.c:htmlindex.h htmllayout.c:htmllayout.h htmlparse.c:htmlparse.h htmlsizer.c:htmlsizer.h htmltable.c:htmltable.h htmltest.c:htmltest.h htmlurl.c:htmlurl.h htmlwidget.c:htmlwidget.h htmlexts.c:htmlexts.h htmltokens.c html.h
+	./makeheaders src/htmlcmd.c src/htmldraw.c src/htmlform.c src/htmlimage.c src/htmlindex.c src/htmllayout.c src/htmlparse.c src/htmlsizer.c src/htmltable.c src/htmltest.c src/htmlurl.c src/htmlwidget.c src/htmlexts.c htmltokens.c html.h
 
 src/makeheaders: tools/makeheaders.c
 	$(COMPILE) $< -o $@
