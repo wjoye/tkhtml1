@@ -5540,6 +5540,7 @@ src/htmltest.c
 src/htmlurl.c
 src/htmlwidget.c
 src/htmlexts.c
+src/htmltokens.c
 "
     for i in $vars; do
 	case $i in

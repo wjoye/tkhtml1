@@ -85,6 +85,7 @@ src/htmltest.c
 src/htmlurl.c
 src/htmlwidget.c
 src/htmlexts.c
+src/htmltokens.c
 ])
 TEA_ADD_HEADERS([])
 TEA_ADD_INCLUDES([-I./src])
