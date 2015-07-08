@@ -1,4 +1,3 @@
-static char const rcsid[] = "@(#) $Id$";
 /*
 ** Routines used to render HTML onto the screen for the Tk HTML widget.
 **
@@ -404,7 +403,9 @@ void HtmlBlockDraw(
   }else{
     /* We are dealing with a single HtmlElement which contains something
     ** other than plain text. */
-    int top, btm, cntr;
+    int top=0;
+    int btm=0;
+    int cntr;
     int cnt, w;
     char zBuf[30];
     switch( src->base.type ){

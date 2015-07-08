@@ -1,4 +1,3 @@
-static char const rcsid[] = "@(#) $Id$";
 /*
 ** Routines used to compute the style and size of individual elements.
 **
@@ -258,7 +257,7 @@ static int GetLinkColor(HtmlWidget *htmlPtr, char *zURL){
     TestPoint(0);
     goto errorOut;
   }
-  result = Tcl_GetBoolean(htmlPtr->interp, htmlPtr->interp->result, &isVisited);
+  result = Tcl_GetBoolean(htmlPtr->interp, Tcl_GetStringResult(htmlPtr->interp), &isVisited);
   if( result!=TCL_OK ){
     TestPoint(0);
     goto errorOut;

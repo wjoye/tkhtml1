@@ -1,5 +1,5 @@
 /* This file was automatically generated.  Do not edit! */
-void HtmlTestPointDump(char *filename);
+void HtmlTestPointDump(const char *filename);
 #define DEBUG 1
 #if defined(DEBUG)
 extern int HtmlDepth;

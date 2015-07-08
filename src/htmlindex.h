@@ -1,7 +1,7 @@
 /* This file was automatically generated.  Do not edit! */
 typedef struct HtmlWidget HtmlWidget;
 typedef union HtmlElement HtmlElement;
-int HtmlGetIndex(HtmlWidget *htmlPtr,char *zIndex,HtmlElement **ppToken,int *pIndex);
+int HtmlGetIndex(HtmlWidget *htmlPtr,const char *zIndex,HtmlElement **ppToken,int *pIndex);
 #define Html_SELECT          116
 #define Html_TEXTAREA        133
 #define Html_INPUT           77

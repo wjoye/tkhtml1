@@ -1,4 +1,3 @@
-static char const rcsid[] = "@(#) $Id$";
 /*
 ** This file contains the code used to position elements of the
 ** HTML file on the screen.

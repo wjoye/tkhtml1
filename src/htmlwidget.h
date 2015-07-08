@@ -6,25 +6,25 @@ DLL_EXPORT int Tkhtml_Init(Tcl_Interp *interp);
 typedef struct HtmlWidget HtmlWidget;
 #define DEBUG 1
 #if defined(DEBUG)
-int HtmlDebugTestPtCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlDebugDumpCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlDebugTestPtCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlDebugDumpCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 #endif
-int HtmlYviewCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlXviewCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlTokenListCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlTokenHandlerCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlTextAsciiCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlSelectionSetCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlSelectionClearCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlResolveCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlParseCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlNamesCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlInsertCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlIndexCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlHrefCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlConfigCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlClearCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlCgetCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlYviewCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlXviewCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlTokenListCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlTokenHandlerCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlTextAsciiCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlSelectionSetCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlSelectionClearCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlResolveCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlParseCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlNamesCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlInsertCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlIndexCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlHrefCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlConfigCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlClearCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlCgetCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 void HtmlHorizontalScroll(HtmlWidget *htmlPtr,int xOffset);
 void HtmlVerticalScroll(HtmlWidget *htmlPtr,int yOffset);
 typedef union HtmlElement HtmlElement;
@@ -95,7 +95,7 @@ void HtmlDeleteElement(HtmlElement *p);
 #define COLOR_Unvisited      1      /* Index for unvisited hyperlinks */
 #define COLOR_Visited        2      /* Color for visited hyperlinks */
 #define COLOR_Normal         0      /* Index for normal color (black) */
-int ConfigureHtmlWidget(Tcl_Interp *interp,HtmlWidget *htmlPtr,int argc,char **argv,int flags,int realign);
+int ConfigureHtmlWidget(Tcl_Interp *interp,HtmlWidget *htmlPtr,int argc,const char **argv,int flags,int realign);
 void HtmlRedrawText(HtmlWidget *htmlPtr,int y);
 void HtmlRedrawEverything(HtmlWidget *htmlPtr);
 typedef struct HtmlBlock HtmlBlock;

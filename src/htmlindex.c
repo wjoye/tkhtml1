@@ -1,4 +1,3 @@
-static char const rcsid[] = "@(#) $Id$";
 /*
 ** Routines that deal with indexes
 **
@@ -25,6 +24,7 @@ static char const rcsid[] = "@(#) $Id$";
 */
 #include <ctype.h>
 #include <tk.h>
+#include <string.h>
 #include "htmlindex.h"
 
 /*
@@ -496,7 +496,7 @@ static int DecodeBaseIndex(
 */
 int HtmlGetIndex(
   HtmlWidget *htmlPtr,     /* The widget */
-  char *zIndex,            /* Complete text of the index spec */
+  const char *zIndex,            /* Complete text of the index spec */
   HtmlElement **ppToken,   /* Write the pointer to the token here */
   int *pIndex              /* Write the character offset here */
 ){

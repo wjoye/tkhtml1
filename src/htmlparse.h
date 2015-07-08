@@ -11,7 +11,7 @@ char *HtmlTokenName(HtmlElement *p);
 #define Html_A               5
 const char *HtmlTypeToName(int type);
 #define Html_Unknown 3
-int HtmlNameToType(char *zType);
+int HtmlNameToType(const char *zType);
 typedef struct HtmlWidget HtmlWidget;
 int HtmlInsertToken(HtmlWidget *htmlPtr,HtmlElement *pToken,char *zType,char *zArgs);
 void HtmlTPUntested(const char *zFile,int line);

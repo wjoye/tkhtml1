@@ -1,4 +1,3 @@
-static char const rcsid[] = "@(#) $Id$";
 /*
 ** This file contains the TestPoint routines used for profiling
 ** and coverage analysis of the code.
@@ -85,7 +84,7 @@ int HtmlDepth = 0;
 /* This function is called to print the values of all elements of the
 ** TP_Array to the given file.  Values are printed in decimal, one per line.
 */
-void HtmlTestPointDump(char *filename){
+void HtmlTestPointDump(const char *filename){
 #if defined(COVERAGE_TEST)
   FILE *fp;
 

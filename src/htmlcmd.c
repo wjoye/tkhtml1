@@ -1,4 +1,3 @@
-static char const rcsid[] = "@(#) $Id$";
 /*
 ** Routines to implement the HTML widget commands
 **
@@ -25,6 +24,7 @@ static char const rcsid[] = "@(#) $Id$";
 */
 #include <tk.h>
 #include <stdlib.h>
+#include <string.h>
 #include "htmlcmd.h"
 
 /*
@@ -37,9 +37,9 @@ int HtmlResolveCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
-  return HtmlCallResolver(htmlPtr, argv+2);
+  return HtmlCallResolver(htmlPtr, (char**)argv+2);
 }
 
 /*
@@ -51,7 +51,7 @@ int HtmlCgetCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   TestPoint(0);
   return Tk_ConfigureValue(interp, htmlPtr->tkwin, HtmlConfigSpec(),
@@ -68,7 +68,7 @@ int HtmlClearCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   HtmlClear(htmlPtr);
   htmlPtr->flags |= REDRAW_TEXT | VSCROLL | HSCROLL;
@@ -86,7 +86,7 @@ int HtmlConfigCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   if (argc == 2) {
      TestPoint(0);
@@ -113,7 +113,7 @@ int HtmlHrefCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   int x, y;
   char *z;
@@ -144,7 +144,7 @@ int HtmlNamesCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   HtmlElement *p;
   char *z;
@@ -176,7 +176,7 @@ int HtmlParseCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   HtmlElement *endPtr;
   endPtr = htmlPtr->pLast;
@@ -217,10 +217,10 @@ int HtmlXviewCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   if( argc==2 ){
-    HtmlComputeHorizontalPosition(htmlPtr,interp->result);
+    HtmlComputeHorizontalPosition(htmlPtr,(char*)Tcl_GetStringResult(interp));
     TestPoint(0);
   }else{
     int count;
@@ -228,7 +228,7 @@ int HtmlXviewCmd(
     int maxX = htmlPtr->maxX;
     int w = HtmlUsableWidth(htmlPtr);
     int offset = htmlPtr->xOffset;
-    int type = Tk_GetScrollInfo(interp,argc,argv,&fraction,&count);
+    int type = Tk_GetScrollInfo(interp,argc,(const char**)argv,&fraction,&count);
     switch( type ){
       case TK_SCROLL_ERROR:
         TestPoint(0);
@@ -275,10 +275,10 @@ int HtmlYviewCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   if( argc==2 ){
-    HtmlComputeVerticalPosition(htmlPtr,interp->result);
+    HtmlComputeVerticalPosition(htmlPtr,(char*)Tcl_GetStringResult(interp));
     TestPoint(0);
   }else if( argc==3 ){
     char *z;
@@ -326,7 +326,7 @@ int HtmlYviewCmd(
     int maxY = htmlPtr->maxY;
     int h = HtmlUsableHeight(htmlPtr);
     int offset = htmlPtr->yOffset;
-    int type = Tk_GetScrollInfo(interp,argc,argv,&fraction,&count);
+    int type = Tk_GetScrollInfo(interp,argc,(const char**)argv,&fraction,&count);
     switch( type ){
       case TK_SCROLL_ERROR:
         TestPoint(0);
@@ -368,7 +368,7 @@ int HtmlTokenHandlerCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   int type = HtmlNameToType(argv[3]);
   if( type==Html_Unknown ){
@@ -377,7 +377,7 @@ int HtmlTokenHandlerCmd(
   }
   if( argc==4 ){
     if( htmlPtr->zHandler[type]!=0 ){
-      interp->result = htmlPtr->zHandler[type];
+      Tcl_SetResult(interp,htmlPtr->zHandler[type],NULL);
     }
   }else{
     if( htmlPtr->zHandler[type]!=0 ){
@@ -398,7 +398,7 @@ int HtmlIndexCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   HtmlElement *p;
   int i;
@@ -412,7 +412,7 @@ int HtmlIndexCmd(
     return TCL_ERROR;
   }
   if( !HtmlUnlock(htmlPtr) && p ){
-    sprintf(interp->result, "%d.%d", HtmlTokenNumber(p), i);
+    sprintf((char*)Tcl_GetStringResult(interp), "%d.%d", HtmlTokenNumber(p), i);
     TestPoint(0);
   }else{
     TestPoint(0);
@@ -562,7 +562,7 @@ int HtmlSelectionSetCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv           /* List of all arguments */
+  const char **argv           /* List of all arguments */
 ){
   HtmlIndex selBegin, selEnd;
 
@@ -597,7 +597,7 @@ int HtmlSelectionClearCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv           /* List of all arguments */
+  const char **argv           /* List of all arguments */
 ){
   htmlPtr->pSelStartBlock = 0;
   htmlPtr->pSelEndBlock = 0;
@@ -632,7 +632,7 @@ int HtmlInsertCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv           /* List of all arguments */
+  const char **argv           /* List of all arguments */
 ){
   HtmlIndex ins;
   if( argv[2][0]==0 ){
@@ -666,7 +666,7 @@ int HtmlTokenListCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   HtmlElement *pStart, *pEnd;
   int i;
@@ -693,7 +693,7 @@ int HtmlDebugDumpCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   HtmlElement *pStart, *pEnd;
   int i;
@@ -719,7 +719,7 @@ int HtmlDebugTestPtCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   HtmlTestPointDump(argv[3]);
   return TCL_OK;

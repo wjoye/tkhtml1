@@ -37,13 +37,12 @@ int HtmlTextAsciiCmd(
   HtmlWidget *htmlPtr,   /* The HTML widget */
   Tcl_Interp *interp,    /* The interpreter */
   int argc,              /* Number of arguments */
-  char **argv            /* List of all arguments */
+  const char **argv            /* List of all arguments */
 ){
   HtmlIndex iStart, iEnd;
-  int i;  
   char *cb, *ce;
-  if (argc<=3) cb="begin"; else cb=argv[3];
-  if (argc<=4) ce=cb; else ce=argv[4];
+  if (argc<=3) cb="begin"; else cb=(char*)argv[3];
+  if (argc<=4) ce=cb; else ce=(char*)argv[4];
 
   if( HtmlGetIndex(htmlPtr, cb, &iStart.p, &iStart.i)!=0 ){
     Tcl_AppendResult(interp,"malformed index: \"", cb, "\"", 0);
@@ -66,7 +65,7 @@ int HtmlTextAsciiCmd(
 ** Return all tokens between the two elements as a Text.
 */
 void HtmlTclizeAscii(Tcl_Interp *interp, HtmlIndex *s, HtmlIndex *e){
-  int i,j, nsub=0;
+  int j, nsub=0;
   HtmlElement* p=s->p;
   Tcl_DString str;
   if (p && p->base.type==Html_Text) {

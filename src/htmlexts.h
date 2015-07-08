@@ -193,7 +193,7 @@ union HtmlElement {
   HtmlScript script;
   HtmlBlock block;
 };
-int HtmlGetIndex(HtmlWidget *htmlPtr,char *zIndex,HtmlElement **ppToken,int *pIndex);
+int HtmlGetIndex(HtmlWidget *htmlPtr,const char *zIndex,HtmlElement **ppToken,int *pIndex);
 typedef struct HtmlIndex HtmlIndex;
 struct HtmlIndex {
   HtmlElement *p;      /* The token containing the character */
@@ -411,7 +411,7 @@ struct HtmlWidget {
   int flags;			/* Various flags;  see below for
 				 * definitions. */
 };
-int HtmlTextAsciiCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlTextAsciiCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 void HtmlTclizeAscii(Tcl_Interp *interp,HtmlIndex *s,HtmlIndex *e);
 void HtmlTclizeAscii(Tcl_Interp *interp,HtmlIndex *s,HtmlIndex *e);
 struct HtmlImage {

@@ -1,4 +1,3 @@
-static char const rcsid[] = "@(#) $Id$";
 /*
 ** The main routine for the HTML widget for Tcl/Tk
 **
@@ -788,7 +787,7 @@ int ConfigureHtmlWidget(
   Tcl_Interp *interp,      /* Write error message to this interpreter */
   HtmlWidget *htmlPtr,     /* The Html widget to be configured */
   int argc,                /* Number of configuration arguments */
-  char **argv,             /* Text of configuration arguments */
+  const char **argv,             /* Text of configuration arguments */
   int flags,               /* Configuration flags */
   int realign              /* Always do a redraw if set */
 ){
@@ -816,7 +815,7 @@ int ConfigureHtmlWidget(
       redraw = 1;
     }
   }
-  rc = Tk_ConfigureWidget(interp, htmlPtr->tkwin, configSpecs, argc, argv,
+  rc = Tk_ConfigureWidget(interp, htmlPtr->tkwin, configSpecs, argc, (const char**)argv,
                          (char *) htmlPtr, flags);
   if( rc!=TCL_OK || redraw==0 ){ TestPoint(0); return rc; }
   memset(htmlPtr->fontValid, 0, sizeof(htmlPtr->fontValid));
@@ -1324,7 +1323,7 @@ Tk_Font HtmlGetFont(
               "\n    (-fontcommand callback of HTML widget)");
         Tcl_BackgroundError(htmlPtr->interp);
       }else{
-        sprintf(name,"%.100s", htmlPtr->interp->result);
+        sprintf(name,"%.100s", Tcl_GetStringResult(htmlPtr->interp));
       }
       Tcl_ResetResult(htmlPtr->interp);
     }
@@ -1734,7 +1733,7 @@ static struct HtmlSubcommand {
   int minArgc;           /* Minimum number of arguments */
   int maxArgc;           /* Maximum number of arguments */
   char *zHelp;           /* Help string if wrong number of arguments */
-  int (*xFunc)(HtmlWidget*,Tcl_Interp*,int,char**);  /* Cmd service routine */
+  int (*xFunc)(HtmlWidget*,Tcl_Interp*,int,const char**);  /* Cmd service routine */
 } aSubcommand[] = {
   { "cget",      0,         3, 3, "CONFIG-OPTION",       HtmlCgetCmd },
   { "clear",     0,         2, 2, 0,                     HtmlClearCmd },
@@ -1774,7 +1773,7 @@ static int HtmlWidgetCommand(
   ClientData clientData,	/* The HTML widget data structure */
   Tcl_Interp *interp,		/* Current interpreter. */
   int argc,			/* Number of arguments. */
-  char **argv			/* Argument strings. */
+  const char **argv			/* Argument strings. */
 ){
   HtmlWidget *htmlPtr = (HtmlWidget*) clientData;
   size_t length;
@@ -1868,7 +1867,7 @@ static int HtmlCommand(
   ClientData clientData,	/* Main window */
   Tcl_Interp *interp,		/* Current interpreter. */
   int argc,			/* Number of arguments. */
-  char **argv			/* Argument strings. */
+  const char **argv			/* Argument strings. */
 ){
   int n, c;
   char *z;
@@ -1878,7 +1877,7 @@ static int HtmlCommand(
          argv[0], " pathName ?options?\"", (char *) NULL);
     return TCL_ERROR;
   }
-  z = argv[1];
+  z = (char*)argv[1];
   n = strlen(z);
   c = z[0];
 
@@ -1940,7 +1939,7 @@ static int HtmlCommand(
     if (ConfigureHtmlWidget(interp, htmlPtr, argc-2, argv+2, 0, 1) != TCL_OK) {
        goto error;
     }
-    interp->result = Tk_PathName(htmlPtr->tkwin);
+    Tcl_SetResult(interp,Tk_PathName(htmlPtr->tkwin),NULL);
     return TCL_OK;
 
     error:
@@ -2036,7 +2035,7 @@ DLL_EXPORT int Tkhtml_Init(Tcl_Interp *interp) {
   Tcl_LinkVar(interp, "HtmlTraceMask", (char*)&HtmlTraceMask, TCL_LINK_INT);
 #endif
 
-  if (Tcl_PkgProvide(interp, PACKAGE_NAME, PACKAGE_VERSION))
+  if (Tcl_PkgProvide(interp, PACKAGE_NAME, PACKAGE_VERSION) != TCL_OK)
     return TCL_ERROR;
 
   return TCL_OK;

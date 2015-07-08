@@ -1,4 +1,3 @@
-static char const rcsid[] = "@(#) $Id$";
 /*
 ** A tokenizer that converts raw HTML into a linked list of HTML elements.
 **
@@ -958,10 +957,10 @@ int HtmlInsertToken(
     ** up.  This is slower, but we gotta do it.
     */
     int argc;
-    char **argv;
+    const char **argv;
     char *zBuf;
 
-    if( Tcl_SplitList(htmlPtr->interp, zArgs, &argc, &argv)!=TCL_OK ){
+    if( Tcl_SplitList(htmlPtr->interp, zArgs, &argc, (const char***)&argv)!=TCL_OK ){
       TestPoint(0);
       return 1;
     }
@@ -1022,7 +1021,7 @@ int HtmlInsertToken(
 /*
 ** Convert a markup name into a type integer
 */
-int HtmlNameToType(char *zType){
+int HtmlNameToType(const char *zType){
   HtmlTokenMap *pMap;     /* For searching the markup name hash table */
   int h;                   /* The hash on zType */
 

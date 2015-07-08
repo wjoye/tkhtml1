@@ -1,4 +1,3 @@
-static char const rcsid[] = "@(#) $Id$";
 /*
 ** Routines for processing URLs.
 **
@@ -255,6 +254,9 @@ int HtmlCallResolver(
     }else if( htmlPtr->zBase && htmlPtr->zBase[0] ){
       z = Trim(htmlPtr->zBase);
     }
+    else
+      z=0;
+
     if( z ){
       Tcl_DStringAppendElement(&cmd, z);
       HtmlFree(z);
@@ -390,8 +392,8 @@ char *HtmlResolveUri(HtmlWidget *htmlPtr, char *zUri){
   result = HtmlCallResolver(htmlPtr, azSeq);
   if( HtmlUnlock(htmlPtr) ) return 0;
   if( result==TCL_OK ){
-    zSrc = HtmlAlloc( strlen(htmlPtr->interp->result) + 1 );
-    if( zSrc ) strcpy(zSrc, htmlPtr->interp->result);
+    zSrc = HtmlAlloc( strlen(Tcl_GetStringResult(htmlPtr->interp)) + 1 );
+    if( zSrc ) strcpy(zSrc, Tcl_GetStringResult(htmlPtr->interp));
   }else{
     zSrc = 0;
   }

@@ -1,22 +1,22 @@
 /* This file was automatically generated.  Do not edit! */
-void HtmlTestPointDump(char *filename);
+void HtmlTestPointDump(const char *filename);
 typedef struct HtmlWidget HtmlWidget;
 #define DEBUG 1
 #if defined(DEBUG)
-int HtmlDebugTestPtCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlDebugTestPtCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 #endif
 typedef union HtmlElement HtmlElement;
 #if defined(DEBUG)
 void HtmlPrintList(HtmlElement *p,HtmlElement *pEnd);
-int HtmlDebugDumpCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlDebugDumpCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 #endif
 void HtmlTclizeList(Tcl_Interp *interp,HtmlElement *p,HtmlElement *pEnd);
-int HtmlTokenListCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlInsertCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlTokenListCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlInsertCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 void HtmlFlashCursor(ClientData clientData);
 void HtmlUpdateInsert(HtmlWidget *htmlPtr);
-int HtmlSelectionClearCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int HtmlSelectionSetCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlSelectionClearCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int HtmlSelectionSetCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 typedef struct HtmlIndex HtmlIndex;
 struct HtmlIndex {
   HtmlElement *p;      /* The token containing the character */
@@ -57,28 +57,28 @@ struct HtmlBlock {
   HtmlBlock *pPrev, *pNext;  /* Linked list of all Blocks */
 };
 int HtmlTokenNumber(HtmlElement *p);
-int HtmlIndexCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlIndexCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 #define HtmlAlloc(A)      ((void*)Tcl_Alloc(A))
 #define HtmlFree(A)       Tcl_Free((char*)(A))
 #define Html_Unknown 3
-int HtmlNameToType(char *zType);
-int HtmlTokenHandlerCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlNameToType(const char *zType);
+int HtmlTokenHandlerCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 int HtmlUsableHeight(HtmlWidget *htmlPtr);
 #define Html_Text    1
-int HtmlGetIndex(HtmlWidget *htmlPtr,char *zIndex,HtmlElement **ppToken,int *pIndex);
+int HtmlGetIndex(HtmlWidget *htmlPtr,const char *zIndex,HtmlElement **ppToken,int *pIndex);
 void HtmlVerticalScroll(HtmlWidget *htmlPtr,int yOffset);
 void HtmlComputeVerticalPosition(HtmlWidget *htmlPtr,char *buf);
-int HtmlYviewCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlYviewCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 void HtmlHorizontalScroll(HtmlWidget *htmlPtr,int xOffset);
 int HtmlUsableWidth(HtmlWidget *htmlPtr);
 void HtmlComputeHorizontalPosition(HtmlWidget *htmlPtr,char *buf);
-int HtmlXviewCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlXviewCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 #define EXTEND_LAYOUT        0x000200
 #define ALIGN_None   0
 void HtmlAddStyle(HtmlWidget *htmlPtr,HtmlElement *p);
 int HtmlIsDead(HtmlWidget *htmlPtr);
 void HtmlTokenizerAppend(HtmlWidget *htmlPtr,const char *zText);
-int HtmlParseCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlParseCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 char *HtmlMarkupArg(HtmlElement *p,const char *tag,char *zDefault);
 #define Html_A               5
 typedef struct HtmlTextElement HtmlTextElement;
@@ -236,20 +236,20 @@ union HtmlElement {
   HtmlScript script;
   HtmlBlock block;
 };
-int HtmlNamesCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlNamesCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 int HtmlUnlock(HtmlWidget *htmlPtr);
 char *HtmlResolveUri(HtmlWidget *htmlPtr,char *zUri);
 void HtmlLock(HtmlWidget *htmlPtr);
 char *HtmlGetHref(HtmlWidget *htmlPtr,int x,int y);
-int HtmlHrefCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
-int ConfigureHtmlWidget(Tcl_Interp *interp,HtmlWidget *htmlPtr,int argc,char **argv,int flags,int realign);
-int HtmlConfigCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlHrefCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
+int ConfigureHtmlWidget(Tcl_Interp *interp,HtmlWidget *htmlPtr,int argc,const char **argv,int flags,int realign);
+int HtmlConfigCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 void HtmlScheduleRedraw(HtmlWidget *htmlPtr);
 #define HSCROLL              0x000004
 #define VSCROLL              0x000008
 #define REDRAW_TEXT          0x000080
 void HtmlClear(HtmlWidget *htmlPtr);
-int HtmlClearCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlClearCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 Tk_ConfigSpec *HtmlConfigSpec(void);
 #if defined(COVERAGE_TEST)
 extern int HtmlTPArray[2000];
@@ -258,7 +258,7 @@ extern int HtmlTPArray[2000];
 #if !(defined(COVERAGE_TEST))
 # define TestPoint(X)
 #endif
-int HtmlCgetCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlCgetCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 int HtmlCallResolver(HtmlWidget *htmlPtr,char **azSeries);
 #define Html_TypeCount       151
 typedef struct HtmlStyleStack HtmlStyleStack;
@@ -472,7 +472,7 @@ struct HtmlWidget {
   int flags;			/* Various flags;  see below for
 				 * definitions. */
 };
-int HtmlResolveCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,char **argv);
+int HtmlResolveCmd(HtmlWidget *htmlPtr,Tcl_Interp *interp,int argc,const char **argv);
 struct HtmlImage {
   HtmlWidget *htmlPtr;     /* The owner of this image */
   Tk_Image image;          /* The Tk image token */
