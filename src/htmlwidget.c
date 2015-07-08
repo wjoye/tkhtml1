@@ -2022,7 +2022,8 @@ static int HtmlCommand(
 ** Tcl interpreter.  This is the only routine in this file with
 ** external linkage.
 */
-DLL_EXPORT int Tkhtml_Init(Tcl_Interp *interp){
+DLL_EXPORT int Tkhtml_Init(Tcl_Interp *interp) {
+
   if (Tcl_InitStubs(interp, TCL_PATCH_LEVEL, 0) == NULL)
     return TCL_ERROR;
 
@@ -2034,6 +2035,7 @@ DLL_EXPORT int Tkhtml_Init(Tcl_Interp *interp){
 #ifdef DEBUG
   Tcl_LinkVar(interp, "HtmlTraceMask", (char*)&HtmlTraceMask, TCL_LINK_INT);
 #endif
+
   if (Tcl_PkgProvide(interp, PACKAGE_NAME, PACKAGE_VERSION))
     return TCL_ERROR;
 
