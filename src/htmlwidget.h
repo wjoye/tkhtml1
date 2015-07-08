@@ -1,6 +1,4 @@
 /* This file was automatically generated.  Do not edit! */
-#define HTML_PKGVERSION "1.0"
-#define HTML_PKGNAME "Tkhtml"
 #define DLL_EXPORT
 DLL_EXPORT int Tkhtml_Init(Tcl_Interp *interp);
 #define INTERFACE 0

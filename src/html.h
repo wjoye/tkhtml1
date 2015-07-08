@@ -30,12 +30,6 @@
 #define DEBUG 1
 
 /*
-** Version information for the package mechanism.
-*/
-#define HTML_PKGNAME "Tkhtml"
-#define HTML_PKGVERSION "1.0"
-
-/*
 ** Sanity checking macros.
 */
 #ifdef DEBUG

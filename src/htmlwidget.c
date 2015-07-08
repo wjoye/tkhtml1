@@ -2023,20 +2023,19 @@ static int HtmlCommand(
 ** external linkage.
 */
 DLL_EXPORT int Tkhtml_Init(Tcl_Interp *interp){
-#ifdef USE_TCL_STUBS
-  if( Tcl_InitStubs(interp,"8.0",0)==0 ){
+  if (Tcl_InitStubs(interp, TCL_PATCH_LEVEL, 0) == NULL)
     return TCL_ERROR;
-  }
-  if( Tk_InitStubs(interp,"8.0",0)==0 ){
+
+  if (Tk_InitStubs(interp, TK_PATCH_LEVEL, 0) == NULL)
     return TCL_ERROR;
-  }
-#endif
-  Tcl_CreateCommand(interp,"html", HtmlCommand, 
-      Tk_MainWindow(interp), 0);
-  /* Tcl_GlobalEval(interp,HtmlLib); */
+
+  Tcl_CreateCommand(interp,"html", HtmlCommand, Tk_MainWindow(interp), 0);
+
 #ifdef DEBUG
   Tcl_LinkVar(interp, "HtmlTraceMask", (char*)&HtmlTraceMask, TCL_LINK_INT);
 #endif
-  Tcl_PkgProvide(interp, HTML_PKGNAME, HTML_PKGVERSION);
+  if (Tcl_PkgProvide(interp, PACKAGE_NAME, PACKAGE_VERSION))
+    return TCL_ERROR;
+
   return TCL_OK;
 }
