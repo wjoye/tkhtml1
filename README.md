@@ -1,5 +1,5 @@
 # tkhtml
-TK HTML Parser.
+TK HTML Widget.
 Tcl/Tk 8.5/8.6 TEA compatible.
 Full support for MacOSX and Windows.
-Original author D. Richard Hipp.
+Based on tkhtml version 1 by D. Richard Hipp.
