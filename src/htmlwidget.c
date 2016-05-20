@@ -2021,7 +2021,7 @@ static int HtmlCommand(
 ** Tcl interpreter.  This is the only routine in this file with
 ** external linkage.
 */
-DLL_EXPORT int Tkhtml_Init(Tcl_Interp *interp) {
+DLL_EXPORT int Tkhtml1_Init(Tcl_Interp *interp) {
 
   if (Tcl_InitStubs(interp, TCL_PATCH_LEVEL, 0) == NULL)
     return TCL_ERROR;
