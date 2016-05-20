@@ -1,6 +1,6 @@
 /* This file was automatically generated.  Do not edit! */
 #define DLL_EXPORT
-DLL_EXPORT int Tkhtml_Init(Tcl_Interp *interp);
+DLL_EXPORT int Tkhtml1_Init(Tcl_Interp *interp);
 #define INTERFACE 0
 #define HtmlAlloc(A)      ((void*)Tcl_Alloc(A))
 typedef struct HtmlWidget HtmlWidget;
