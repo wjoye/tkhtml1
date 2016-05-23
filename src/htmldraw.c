@@ -26,10 +26,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include "htmldraw.h"
+/*
 #ifdef USE_TK_STUBS
 # include <tkIntXlibDecls.h>
 #endif
-
+*/
 #define USE_TK_DRAWCHARS 1
 
 /*
