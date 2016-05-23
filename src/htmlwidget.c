@@ -27,10 +27,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "htmlwidget.h"
+/*
 #ifdef USE_TK_STUBS
 # include <tkIntXlibDecls.h>
 #endif
-
+*/
 /*
 ** This global variable is used for tracing the operation of
 ** the Html formatter.
