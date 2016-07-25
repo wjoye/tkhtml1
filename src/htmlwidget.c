@@ -1681,7 +1681,7 @@ void HtmlVerticalScroll(HtmlWidget *htmlPtr, int yOffset){
   w = htmlPtr->realWidth - 2*(htmlPtr->inset + htmlPtr->padx);
   htmlPtr->flags |= VSCROLL;
   htmlPtr->yOffset = yOffset;
-#ifndef _MACOSX
+#ifndef MAC_OSX_TK
   if( diff < 0 ){
     XCopyArea(htmlPtr->display, 
             Tk_WindowId(htmlPtr->clipwin),    /* source */
