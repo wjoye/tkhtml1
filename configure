@@ -5080,20 +5080,20 @@ $as_echo "#define AC_APPLE_UNIVERSAL_BUILD 1" >>confdefs.h
 
 
     vars="
-src/htmlcmd.c
-src/htmldraw.c
-src/htmlform.c
-src/htmlimage.c
-src/htmlindex.c
-src/htmllayout.c
-src/htmlparse.c
-src/htmlsizer.c
-src/htmltable.c
-src/htmltest.c
-src/htmlurl.c
-src/htmlwidget.c
-src/htmlexts.c
-src/htmltokens.c
+htmlcmd.c
+htmldraw.c
+htmlform.c
+htmlimage.c
+htmlindex.c
+htmllayout.c
+htmlparse.c
+htmlsizer.c
+htmltable.c
+htmltest.c
+htmlurl.c
+htmlwidget.c
+htmlexts.c
+htmltokens.c
 "
     for i in $vars; do
 	case $i in
