@@ -5140,7 +5140,7 @@ htmltokens.c
 
 
 
-    vars="-I./src"
+    vars=""
     for i in $vars; do
 	PKG_INCLUDES="$PKG_INCLUDES $i"
     done
